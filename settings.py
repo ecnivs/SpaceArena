@@ -1,0 +1,19 @@
+# screen settings
+WIDTH = 800
+HEIGHT = 600
+
+# game settings
+BORDER_WIDTH = 1400
+BORDER_HEIGHT = 520
+BOUNCE = 1
+PLAYERS = 1 # One or Two
+RADAR = 300
+
+# player settings
+LIVES = 3
+MAX_HEALTH = 100
+ACCELERATION = 0.004
+MAX_THRUST = 1.5
+ROTATION_SPEED = 0.5
+MAX_FUEL = 500 # missile fuel
+DAMAGE = 10
