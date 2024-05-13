@@ -58,7 +58,7 @@ class CharacterPen():
         pen.width(2)
         pen.color(self.color)
         
-        # Center text
+        # center text
         x -= 15 * self.scale * ((len(str)-1) / 2)
         for character in str:
             self.draw_character(pen, character, x, y)
@@ -72,7 +72,7 @@ class CharacterPen():
         
         character = character.upper()
         
-        # Check if the character is in the dictionary
+        # check if the character is in the dictionary
         if character in self.characters:
             pen.penup()
             xy = self.characters[character][0]

@@ -61,7 +61,6 @@ class Player(Sprite):
         directions = [0, 5, -5]
 
         for missile in missiles1:
-            # print(directions)
             if missile.state == "ready":
                 missile.x = self.x
                 missile.y = self.y
@@ -85,7 +84,6 @@ class Player(Sprite):
         directions = [0, 5, -5]
 
         for missile in missiles2:
-            # print(directions)
             if missile.state == "ready":
                 missile.x = self.x
                 missile.y = self.y

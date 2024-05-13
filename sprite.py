@@ -38,19 +38,22 @@ class Sprite:
             return False
 
     def collide(self, other):
+        # swapping values
         temp_dx = self.dx
         temp_dy = self.dy
 
         self.dx = other.dx
         self.dy = other.dy
-
+        
         other.dx = temp_dx
         other.dy = temp_dy
-
+        
+        # collision damage
         self.health -= 10
         other.health -= 10
 
     def border_chk(self):
+        # bounce off borders
         if self.x >= BORDER_WIDTH - 20:
             self.dx *= -self.bounce
         elif self.x <= -BORDER_WIDTH + 20:

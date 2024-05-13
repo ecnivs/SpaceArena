@@ -16,7 +16,6 @@ class Camera:
         self.left = self.x - (WIDTH / 2)
         self.right = self.x + (WIDTH / 2)
 
-
 class Star(Sprite):
     def __init__(self, x, y, shape="circle", color="yellow"):
         Sprite.__init__(self, x, y, shape, color)
