@@ -334,8 +334,6 @@ while True:
 
     # render stats
     game.render_info(pen, 0, 0)
-    
-    # update radar
     radar.render(pen)
     
     # update the screen
