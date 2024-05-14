@@ -1,5 +1,5 @@
 import math
-from settings import BORDER_WIDTH, BORDER_HEIGHT, BOUNCE, MAX_HEALTH, PLAYERS
+from settings import BORDER_WIDTH, BORDER_HEIGHT, BOUNCE, ENEMY_SPEED, MAX_HEALTH, PLAYERS
 import random
 
 class Sprite:
@@ -50,8 +50,8 @@ class Sprite:
         other.dy = temp_dy
         
         # collision damage
-        self.health -= 10
-        other.health -= 10
+        self.health -= (self.max_health/10)
+        other.health -= (other.max_health/5)
 
     def border_chk(self):
         # bounce off borders
@@ -90,8 +90,12 @@ class Sprite:
                 self.state = self.reset()
 
 class Enemy(Sprite):
-    def __init__(self, x, y, shape, color):
+    def __init__(self, x, y, shape, color, target):
         Sprite.__init__(self, x, y, shape, color)
+        self.dx = 0
+        self.dy = 0
+        self.target = target
+        self.speed = ENEMY_SPEED
         self.max_health = 50
         self.health = self.max_health
         self.stance = random.choice(["agressive", "passive", "idle"])
@@ -103,8 +107,9 @@ class Enemy(Sprite):
             self.color = "yellow"
 
         if PLAYERS > 1:
-            self.dx = random.choice([1, -1])
-            self.dy = random.choice([1, -1])
+            if self.stance != "idle":
+                self.dx = random.choice([self.speed, -self.speed])
+                self.dy = random.choice([self.speed, -self.speed])
 
     def render(self, pen, x_offset, y_offset):
         if self.state == "active":
@@ -135,6 +140,48 @@ class Enemy(Sprite):
                 print(e)
 
         pen.penup()
+
+    def update(self):
+        if self.state == "active":
+            self.heading += self.da
+            self.heading %= 360
+
+            self.dx += math.cos(math.radians(self.heading)) * self.thrust
+            self.dy += math.cos(math.radians(self.heading)) * self.thrust
+
+            self.x += self.dx
+            self.y += self.dy
+
+            self.border_chk()
+            if self.health <= 0:
+                self.state = self.reset()
+
+            if PLAYERS < 2:
+                if self.stance == "agressive":
+                    if self.x > self.target.x:
+                        self.dx -= self.speed
+                    elif self.x < self.target.x:
+                        self.dx += self.speed
+                    if self.y > self.target.y:
+                        self.dy -= self.speed
+                    elif self.y < self.target.y:
+                        self.dy += self.speed
+
+                if self.stance == "passive":
+                    if self.x > self.target.x:
+                        self.dx += self.speed
+                    elif self.x < self.target.x:
+                        self.dx -= self.speed
+                    if self.y > self.target.y:
+                        self.dy += self.speed
+                    elif self.y < self.target.y:
+                        self.dy -= self.speed
+
+            if self.stance == "idle":
+                if self.dx != 0 or self.dy != 0:
+                    self.dx /= 1.01
+                    self.dy /= 1.01 
+                    
 
 class Powerup(Sprite):
     def __init__(self, x, y, shape, color):

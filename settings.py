@@ -8,6 +8,7 @@ BORDER_HEIGHT = 520
 BOUNCE = 1
 PLAYERS = 1 # One or Two
 RADAR = 300
+ENEMY_SPEED = 0.004
 
 # player settings
 LIVES = 3

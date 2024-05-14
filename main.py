@@ -34,7 +34,7 @@ class Game:
         for _ in range(self.level):
             x = random.randint(-self.width//2, self.width//2)
             y = random.randint(-self.height//2, self.height//2)
-            sprites.append(Enemy(x, y, "square", "red"))
+            sprites.append(Enemy(x, y, "square", "red", player1))
 
         for _ in range(self.level):
             x = random.randint(-self.width//2, self.width//2)
