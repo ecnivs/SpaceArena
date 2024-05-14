@@ -34,20 +34,12 @@ class Game:
         for _ in range(self.level):
             x = random.randint(-self.width//2, self.width//2)
             y = random.randint(-self.height//2, self.height//2)
-            dx = random.randint(-1, 1)
-            dy = random.randint(-1, 1)
             sprites.append(Enemy(x, y, "square", "red"))
-            sprites[-1].dx = dx
-            sprites[-1].dy = dy
 
         for _ in range(self.level):
             x = random.randint(-self.width//2, self.width//2)
             y = random.randint(-self.height//2, self.height//2)
-            dx = random.randint(-1, 1)
-            dy = random.randint(-1, 1)
-            sprites.append(Powerup(x, y, "circle", "yellow"))
-            sprites[-1].dx = dx
-            sprites[-1].dy = dy
+            sprites.append(Powerup(x, y, "circle", "green"))
     
     def render_border(self, pen, x_offset, y_offset):
         pen.color("white")
@@ -66,7 +58,7 @@ class Game:
         pen.goto(left, top)
         pen.penup()
 
-    def render_info(self, pen, score, active_enemies = 0):
+    def render_info(self, pen, score, active_enemies):
         pen.color("#202020")
         pen.penup()
         pen.goto(400, 0)
@@ -264,7 +256,7 @@ while True:
         missile.render(pen, camera.x - 100, camera.y)
 
     for sprite in sprites:
-        Sprite.update(sprite)
+        sprite.update()
         sprite.render(pen, camera.x - 100, camera.y)
 
     # check for collisions

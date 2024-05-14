@@ -1,5 +1,6 @@
 import math
-from settings import BORDER_WIDTH, BORDER_HEIGHT, BOUNCE, MAX_HEALTH
+from settings import BORDER_WIDTH, BORDER_HEIGHT, BOUNCE, MAX_HEALTH, PLAYERS
+import random
 
 class Sprite:
     @staticmethod
@@ -93,6 +94,17 @@ class Enemy(Sprite):
         Sprite.__init__(self, x, y, shape, color)
         self.max_health = 50
         self.health = self.max_health
+        self.stance = random.choice(["agressive", "passive", "idle"])
+        if self.stance == "agressive":
+            self.color = "red"
+        elif self.stance == "passive":
+            self.color = "orange"
+        elif self.stance == "idle":
+            self.color = "yellow"
+
+        if PLAYERS > 1:
+            self.dx = random.choice([1, -1])
+            self.dy = random.choice([1, -1])
 
     def render(self, pen, x_offset, y_offset):
         if self.state == "active":
