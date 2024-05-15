@@ -53,6 +53,18 @@ class Sprite:
         self.health -= (self.max_health/10)
         other.health -= (other.max_health/5)
 
+        # 5% chance to change stance on collision
+        if isinstance(other, Enemy):
+            if (random.randrange(1,100)) > 95:
+                other.stance = random.choice(["agressive", "passive", "idle"])
+                if other.stance == "agressive":
+                    other.color = "red"
+                elif other.stance == "passive":
+                    other.color = "orange"
+                elif other.stance == "idle":
+                    other.color = "yellow"
+
+
     def border_chk(self):
         # bounce off borders
         if self.x >= BORDER_WIDTH - 20:
@@ -90,11 +102,13 @@ class Sprite:
                 self.state = self.reset()
 
 class Enemy(Sprite):
-    def __init__(self, x, y, shape, color, target):
+    def __init__(self, x, y, shape, color, target1, target2):
         Sprite.__init__(self, x, y, shape, color)
         self.dx = 0
         self.dy = 0
-        self.target = target
+        self.target = random.choice([target1, target2])
+        self.target1 = target1
+        self.target2 = target2
         self.speed = ENEMY_SPEED
         self.max_health = 50
         self.health = self.max_health
@@ -155,27 +169,36 @@ class Enemy(Sprite):
             self.border_chk()
             if self.health <= 0:
                 self.state = self.reset()
+            
+            # check distance to players
+            tar_dist1 = ((self.target1.x - self.x)**2 + (self.target1.y - self.y)**2)**0.5
+            tar_dist2 = ((self.target1.x - self.x)**2 + (self.target1.y - self.y)**2)**0.5
+            
+            # choose closer player as target
+            if tar_dist1 > tar_dist2:
+                self.target = self.target2
+            else:
+                self.target = self.target1
 
-            if PLAYERS < 2:
-                if self.stance == "agressive":
-                    if self.x > self.target.x:
-                        self.dx -= self.speed
-                    elif self.x < self.target.x:
-                        self.dx += self.speed
-                    if self.y > self.target.y:
-                        self.dy -= self.speed
-                    elif self.y < self.target.y:
-                        self.dy += self.speed
+            if self.stance == "agressive":
+                if self.x > self.target.x:
+                    self.dx -= self.speed
+                elif self.x < self.target.x:
+                    self.dx += self.speed
+                if self.y > self.target.y:
+                    self.dy -= self.speed
+                elif self.y < self.target.y:
+                    self.dy += self.speed
 
-                if self.stance == "passive":
-                    if self.x > self.target.x:
-                        self.dx += self.speed
-                    elif self.x < self.target.x:
-                        self.dx -= self.speed
-                    if self.y > self.target.y:
-                        self.dy += self.speed
-                    elif self.y < self.target.y:
-                        self.dy -= self.speed
+            if self.stance == "passive":
+                if self.x > self.target.x:
+                    self.dx += self.speed
+                elif self.x < self.target.x:
+                    self.dx -= self.speed
+                if self.y > self.target.y:
+                    self.dy += self.speed
+                elif self.y < self.target.y:
+                    self.dy -= self.speed
 
             if self.stance == "idle":
                 if self.dx != 0 or self.dy != 0:

@@ -26,7 +26,7 @@ class Game:
         self.width = width
         self.height = height
         self.frame = 0
-        self.level = 1
+        self.level = 2
 
     def start_level(self):
         sprites.clear()
@@ -34,7 +34,7 @@ class Game:
         for _ in range(self.level):
             x = random.randint(-self.width//2, self.width//2)
             y = random.randint(-self.height//2, self.height//2)
-            sprites.append(Enemy(x, y, "square", "red", player1))
+            sprites.append(Enemy(x, y, "square", "red", players[0], players[-1]))
 
         for _ in range(self.level):
             x = random.randint(-self.width//2, self.width//2)
@@ -128,8 +128,7 @@ class Radar():
                 pen.shape(player.shape)
                 pen.shapesize(0.4, 0.4, None)              
                 distance = ((camera.x-player.x)**2 + (camera.y - player.y)**2)**0.5
-                if distance < camera.radar:
-                    pen.stamp()
+                pen.stamp()
 
         # draw sprites
         for missile in missiles1:
