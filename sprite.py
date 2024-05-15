@@ -160,9 +160,6 @@ class Enemy(Sprite):
             self.heading += self.da
             self.heading %= 360
 
-            self.dx += math.cos(math.radians(self.heading)) * self.thrust
-            self.dy += math.cos(math.radians(self.heading)) * self.thrust
-
             self.x += self.dx
             self.y += self.dy
 
