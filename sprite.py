@@ -53,9 +53,9 @@ class Sprite:
         self.health -= (self.max_health/10)
         other.health -= (other.max_health/5)
 
-        # 5% chance to change stance on collision
+        # 25% chance to change stance on collision
         if isinstance(other, Enemy):
-            if (random.randrange(1,100)) > 95:
+            if (random.randrange(1,100)) > 75:
                 other.stance = random.choice(["agressive", "passive", "idle"])
                 if other.stance == "agressive":
                     other.color = "red"
@@ -181,24 +181,24 @@ class Enemy(Sprite):
             # move towards target if agressive
             if self.stance == "agressive":
                 if self.x > self.target.x:
-                    self.dx -= self.speed
+                    self.dx -= random.uniform(0.0, float(self.speed))
                 elif self.x < self.target.x:
-                    self.dx += self.speed
+                    self.dx += random.uniform(0.0, float(self.speed))
                 if self.y > self.target.y:
-                    self.dy -= self.speed
+                    self.dy -= random.uniform(0.0, float(self.speed))
                 elif self.y < self.target.y:
-                    self.dy += self.speed
+                    self.dy += random.uniform(0.0, float(self.speed))
 
             # move away from target if passive
             if self.stance == "passive":
                 if self.x > self.target.x:
-                    self.dx += self.speed
+                    self.dx += random.uniform(0.0, float(self.speed))
                 elif self.x < self.target.x:
-                    self.dx -= self.speed
+                    self.dx -= random.uniform(0.0, float(self.speed))
                 if self.y > self.target.y:
-                    self.dy += self.speed
+                    self.dy += random.uniform(0.0, float(self.speed))
                 elif self.y < self.target.y:
-                    self.dy -= self.speed
+                    self.dy -= random.uniform(0.0, float(self.speed))
 
             # dont move if idle
             if self.stance == "idle":
