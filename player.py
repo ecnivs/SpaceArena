@@ -50,7 +50,8 @@ class Player(Sprite):
 
     def stop_rotation(self):
         self.da = 0
-
+    
+    # prevent players from leaving the camera
     def cam_chk(self, camera_left, camera_right):
         if self.x > camera_right - 20:
             self.dx *= -1
@@ -122,7 +123,8 @@ class Player(Sprite):
                 self.reset()
             if self.lives < 1:
                 self.state = "inactive"
-
+            
+            # regen
             if self.health < self.max_health:
                 self.health += self.regen
 

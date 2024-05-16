@@ -228,6 +228,7 @@ wn.onkeyrelease(player2.decelerate, "Up")
 wn.onkeyrelease(player2.decelerate, "Down")
 
 while True:
+    # render borders
     game.render_border(pen, camera.x - 100, camera.y)
 
     # camera update
@@ -235,6 +236,7 @@ while True:
     mid_y = (players[0].y + players[-1].y) / 2
     camera.update(mid_x, mid_y)
 
+    # render stars
     for sprite in background_sprites:
         sprite.update()
         if Sprite.is_on_screen(sprite, WIDTH, HEIGHT, player1.x, player1.y):
@@ -307,7 +309,8 @@ while True:
     if player2.is_collision(missile1) and missile1.state == "active":
         player2.health -= (player1.damage//2)
         missile1.reset()
-
+    
+    # remove players if inactive
     if len(players) > 1:
         if players[0].state == "inactive":
             players.pop(0)
