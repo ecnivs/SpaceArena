@@ -1,5 +1,5 @@
 import math
-from settings import ACCELERATION, DAMAGE,MAX_FUEL, MAX_HEALTH, LIVES, MAX_THRUST, ROTATION_SPEED, PLAYERS
+from settings import ACCELERATION, DAMAGE,MAX_FUEL, MAX_HEALTH, LIVES, MAX_THRUST, REGEN, ROTATION_SPEED
 from sprite import Sprite
 
 # lists
@@ -22,6 +22,7 @@ class Player(Sprite):
         self.damage = DAMAGE
         self.width = 20
         self.height = 20
+        self.regen = REGEN
 
     def accelerate(self):
         self.thrust += self.acceleration
@@ -70,7 +71,8 @@ class Player(Sprite):
                 missile.dx += self.dx
                 missile.dy += self.dy
                 missile.state = "active"
-
+                
+                # recoil
                 self.dx -= missile.dx * 0.02
                 self.dy -= missile.dy * 0.02
 
@@ -93,7 +95,8 @@ class Player(Sprite):
                 missile.dx += self.dx
                 missile.dy += self.dy
                 missile.state = "active"
-
+                
+                # recoil
                 self.dx -= missile.dx * 0.02
                 self.dy -= missile.dy * 0.02
 
@@ -102,7 +105,7 @@ class Player(Sprite):
                 if len(directions) == 0:
                     break
 
-    def update(self, cam_L, cam_R):
+    def update(self):
         if self.state == "active":
             self.heading += self.da
             self.heading %= 360
@@ -114,12 +117,14 @@ class Player(Sprite):
             self.y += self.dy
 
             self.border_chk()
-            self.cam_chk(cam_L, cam_R)
 
             if self.health <= 0:
                 self.reset()
             if self.lives < 1:
                 self.state = "inactive"
+
+            if self.health < self.max_health:
+                self.health += self.regen
 
     def reset(self):
         self.health = self.max_health

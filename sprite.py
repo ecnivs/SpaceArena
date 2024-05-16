@@ -1,5 +1,5 @@
 import math
-from settings import BORDER_WIDTH, BORDER_HEIGHT, BOUNCE, ENEMY_SPEED, MAX_HEALTH, PLAYERS
+from settings import BORDER_WIDTH, BORDER_HEIGHT, BOUNCE, ENEMY_REGEN, ENEMY_SPEED, MAX_HEALTH, PLAYERS
 import random
 
 class Sprite:
@@ -109,6 +109,7 @@ class Enemy(Sprite):
         self.target = random.choice([target1, target2])
         self.target1 = target1
         self.target2 = target2
+        self.regen = ENEMY_REGEN
         self.speed = ENEMY_SPEED
         self.max_health = 50
         self.health = self.max_health
@@ -177,6 +178,7 @@ class Enemy(Sprite):
             else:
                 self.target = self.target1
 
+            # move towards target if agressive
             if self.stance == "agressive":
                 if self.x > self.target.x:
                     self.dx -= self.speed
@@ -187,6 +189,7 @@ class Enemy(Sprite):
                 elif self.y < self.target.y:
                     self.dy += self.speed
 
+            # move away from target if passive
             if self.stance == "passive":
                 if self.x > self.target.x:
                     self.dx += self.speed
@@ -197,11 +200,15 @@ class Enemy(Sprite):
                 elif self.y < self.target.y:
                     self.dy -= self.speed
 
+            # dont move if idle
             if self.stance == "idle":
                 if self.dx != 0 or self.dy != 0:
                     self.dx /= 1.01
-                    self.dy /= 1.01 
-                    
+                    self.dy /= 1.01
+
+            # regen
+            if self.health < self.max_health:
+                self.health += self.regen
 
 class Powerup(Sprite):
     def __init__(self, x, y, shape, color):

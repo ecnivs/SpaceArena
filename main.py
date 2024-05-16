@@ -244,7 +244,8 @@ while True:
 
     for player in players:
         player.render(pen, camera.x - 100, camera.y)
-        Player.update(player, camera.left, camera.right)
+        Player.update(player)
+        player.cam_chk(camera.left, camera.right)
 
     for missile in missiles1:
         Missile.update(missile)

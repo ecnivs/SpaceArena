@@ -5,10 +5,11 @@ HEIGHT = 600
 # game settings
 BORDER_WIDTH = 1400
 BORDER_HEIGHT = 520
-BOUNCE = 1
+BOUNCE = 0.9
 PLAYERS = 2 # One or Two
 RADAR = 300
 ENEMY_SPEED = 0.004
+ENEMY_REGEN = 0.004
 
 # player settings
 LIVES = 3
@@ -18,3 +19,4 @@ MAX_THRUST = 1.5
 ROTATION_SPEED = 0.6
 MAX_FUEL = 500 # missile fuel
 DAMAGE = 10
+REGEN = 0.004
