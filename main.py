@@ -2,7 +2,7 @@
 # by Vince Swu
 
 import turtle
-from settings import BORDER_HEIGHT, WIDTH, HEIGHT, BORDER_WIDTH
+from settings import BORDER_HEIGHT, WIDTH, HEIGHT, BORDER_WIDTH, MISSILES
 from sprite import *
 from player import *
 from utils import Camera, Star
@@ -80,10 +80,10 @@ class Game:
         character_pen.draw_string(pen, "LEVEL {}".format(game.level), 400, 240)
         character_pen.color = "blue"
         if PLAYERS > 1:
-            character_pen.draw_string(pen, "1P LIVES {}".format(player.lives), 400, 210)
+            character_pen.draw_string(pen, "1P LIVES {}".format(player1.lives), 400, 210)
             character_pen.draw_string(pen, "1P SCORE {}".format(player1.score), 400, 180)
             character_pen.color = "red"
-            character_pen.draw_string(pen, "2P LIVES {}".format(player.lives), 400, 150)
+            character_pen.draw_string(pen, "2P LIVES {}".format(player2.lives), 400, 150)
             character_pen.draw_string(pen, "2P SCORE {}".format(player2.score), 400, 120)
         else:
             character_pen.draw_string(pen, "LIVES {}".format(player1.lives), 400, 210)
@@ -188,8 +188,9 @@ if PLAYERS > 1:
     players.append(player2)
 
 # add sprites to list
-missiles1.append(missile1)
-missiles2.append(missile2)
+for _ in range(MISSILES):
+    missiles1.append(missile1)
+    missiles2.append(missile2)
 
 # set up the camera
 camera = Camera(0, 0)
@@ -284,18 +285,20 @@ while True:
                     players[-1].collide(sprite)
                     if sprite.health <= 0:
                         players[-1].score += 100
+            
+            for missile1 in missiles1:
+                if missile1.state == "active" and missile1.is_collision(sprite):
+                    sprite.health -= player1.damage
+                    missile1.reset()
+                    if sprite.health <= 0:
+                        player1.score += 100
 
-            if missile1.state == "active" and missile1.is_collision(sprite):
-                sprite.health -= player1.damage
-                missile1.reset()
-                if sprite.health <= 0:
-                    player1.score += 100
-
-            if missile2.state == "active" and missile2.is_collision(sprite):
-                sprite.health -= player2.damage
-                missile2.reset()
-                if sprite.health <= 0:
-                    player2.score += 100
+            for missile2 in missiles2:
+                if missile2.state == "active" and missile2.is_collision(sprite):
+                    sprite.health -= player2.damage
+                    missile2.reset()
+                    if sprite.health <= 0:
+                        player2.score += 100
 
         if isinstance(sprite, Powerup):
             if players[0].is_collision(sprite) and sprite.state == "active":
@@ -309,13 +312,15 @@ while True:
                     players[-1].health = players[-1].max_health
                     players[-1].score += 50
 
-            if missile1.state == "active" and missile1.is_collision(sprite):
-                sprite.reset()
-                missile1.reset()
-
-            if missile2.state == "active" and missile2.is_collision(sprite):
-                sprite.reset()
-                missile2.reset()
+            for missile1 in missiles1:
+                if missile1.state == "active" and missile1.is_collision(sprite):
+                    sprite.reset()
+                    missile1.reset()
+            
+            for missile2 in missiles2:
+                if missile2.state == "active" and missile2.is_collision(sprite):
+                    sprite.reset()
+                    missile2.reset()
     
     # player collision
     if len(players) > 1:
@@ -327,16 +332,18 @@ while True:
                 players[-1].score -= 20
 
     # missile to player collision
-    if player1.is_collision(missile2) and missile2.state == "active":
-        player1.health -= (player2.damage//2)
-        if player1.score > 0:
-            player1.score -= 20
-        missile2.reset()
-    if player2.is_collision(missile1) and missile1.state == "active":
-        player2.health -= (player1.damage//2)
-        if player2.score > 0:
-            player2.score -= 20
-        missile1.reset()
+    for missile2 in missiles2:
+        if player1.is_collision(missile2) and missile2.state == "active":
+            player1.health -= (player2.damage//2)
+            if player1.score > 0:
+                player1.score -= 20
+            missile2.reset()
+    for missile1 in missiles1:
+        if player2.is_collision(missile1) and missile1.state == "active":
+            player2.health -= (player1.damage//2)
+            if player2.score > 0:
+                player2.score -= 20
+            missile1.reset()
     
     # game over
     if players[0].state == "inactive" and players[-1].state == "inactive":
