@@ -128,7 +128,10 @@ class Radar():
                 pen.shape(player.shape)
                 pen.shapesize(0.4, 0.4, None)              
                 distance = ((camera.x-player.x)**2 + (camera.y - player.y)**2)**0.5
+                if distance > camera.radar:
+                    pen.shape("circle")
                 pen.stamp()
+                pen.shape(player.shape)
 
         # draw sprites
         for missile in missiles1:
