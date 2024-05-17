@@ -94,7 +94,7 @@ class Sprite:
                 else:
                     pen.color("green")
                 pen.fd(20.0 * (self.health / self.max_health))
-                if self.health < self.max_health:
+                if self.health != self.max_health:
                     pen.color("grey")
                     pen.fd(20.0 * ((self.max_health - self.health) / self.max_health))
             except Exception as e:
