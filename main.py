@@ -9,7 +9,7 @@ from utils import Camera, Star
 from penconf import *
 import random
 
-# screen setup
+# secreen setup
 wn = turtle.Screen()
 wn.setup(WIDTH+220, HEIGHT+220)
 wn.title("Space Arena")
@@ -58,7 +58,7 @@ class Game:
         pen.goto(left, top)
         pen.penup()
 
-    def render_info(self, pen, score, active_enemies):
+    def render_info(self, pen, active_enemies):
         pen.color("#202020")
         pen.penup()
         pen.goto(400, 0)
@@ -77,10 +77,16 @@ class Game:
         pen.color("white")
         character_pen.scale = 1.0
         character_pen.draw_string(pen, "SPACE ARENA", 400, 270)
-        character_pen.draw_string(pen, "SCORE {}".format(score), 400, 240)
-        character_pen.draw_string(pen, "ENEMIES {}".format(active_enemies), 400, 210)
-        character_pen.draw_string(pen, "LIVES {}".format(player.lives), 400, 180)
-        character_pen.draw_string(pen, "LEVEL {}".format(game.level), 400, 150)
+        character_pen.draw_string(pen, "ENEMIES {}".format(active_enemies), 400, 240)
+        character_pen.draw_string(pen, "LEVEL {}".format(game.level), 400, 210)
+        if PLAYERS > 1:
+            character_pen.draw_string(pen, "1P LIVES {}".format(player.lives), 400, 180)
+            character_pen.draw_string(pen, "1P SCORE {}".format(player1.score), 400, 150)
+            character_pen.draw_string(pen, "2P LIVES {}".format(player.lives), 400, 120)
+            character_pen.draw_string(pen, "2P SCORE {}".format(player2.score), 400, 90)
+        else:
+            character_pen.draw_string(pen, "LIVES {}".format(player1.lives), 400, 180)
+            character_pen.draw_string(pen, "SCORE {}".format(player1.score), 400, 150)
         
     def start(self):
         self.state = "playing"
@@ -331,7 +337,7 @@ while True:
         game.start_level()
 
     # render stats
-    game.render_info(pen, 0, 0)
+    game.render_info(pen, 0)
     radar.render(pen)
     
     # update the screen

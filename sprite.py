@@ -39,7 +39,7 @@ class Sprite:
             return False
 
     def collide(self, other):
-        # swapping values
+        # swapping momentum
         temp_dx = self.dx
         temp_dy = self.dy
 

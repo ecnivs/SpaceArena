@@ -24,6 +24,7 @@ class Player(Sprite):
         self.height = 20
         self.regen = REGEN
         self.missiles = missiles
+        self.score = 0
 
     def accelerate(self):
         self.thrust += self.acceleration
