@@ -322,17 +322,21 @@ while True:
     if len(players) > 1:
         if players[0].is_collision(players[-1]):
             players[0].collide(players[-1])
-            players[0].score -= 20
-            players[-1].score -= 20
+            if players[0].score > 0:
+                players[0].score -= 20
+            if players[-1].score > 0:
+                players[-1].score -= 20
 
     # missile to player collision
     if player1.is_collision(missile2) and missile2.state == "active":
         player1.health -= (player2.damage//2)
-        player1.score -= 20
+        if player1.score > 0:
+            player1.score -= 20
         missile2.reset()
     if player2.is_collision(missile1) and missile1.state == "active":
         player2.health -= (player1.damage//2)
-        player2.score -= 20
+        if player2.score > 0:
+            player2.score -= 20
         missile1.reset()
     
     # remove players if inactive

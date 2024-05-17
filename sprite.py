@@ -145,11 +145,6 @@ class Enemy(Sprite):
         elif self.stance == "idle":
             self.color = "yellow"
 
-        if PLAYERS > 1:
-            if self.stance != "idle":
-                self.dx = random.choice([self.speed, -self.speed])
-                self.dy = random.choice([self.speed, -self.speed])
-
     def render(self, pen, x_offset, y_offset):
         if self.state == "active":
             pen.shapesize(stretch_wid=1, stretch_len=1, outline=None)
@@ -176,7 +171,7 @@ class Enemy(Sprite):
             
             # check distance to players
             tar_dist1 = ((self.target1.x - self.x)**2 + (self.target1.y - self.y)**2)**0.5
-            tar_dist2 = ((self.target1.x - self.x)**2 + (self.target1.y - self.y)**2)**0.5
+            tar_dist2 = ((self.target2.x - self.x)**2 + (self.target2.y - self.y)**2)**0.5
             
             # choose closer player as target
             if tar_dist1 > tar_dist2:
@@ -187,24 +182,24 @@ class Enemy(Sprite):
             # move towards target if agressive
             if self.stance == "agressive":
                 if self.x > self.target.x:
-                    self.dx -= random.uniform(0.0, float(self.speed))
+                    self.dx -= random.uniform(0.002, float(self.speed))
                 elif self.x < self.target.x:
-                    self.dx += random.uniform(0.0, float(self.speed))
+                    self.dx += random.uniform(0.002, float(self.speed))
                 if self.y > self.target.y:
-                    self.dy -= random.uniform(0.0, float(self.speed))
+                    self.dy -= random.uniform(0.002, float(self.speed))
                 elif self.y < self.target.y:
-                    self.dy += random.uniform(0.0, float(self.speed))
+                    self.dy += random.uniform(0.002, float(self.speed))
 
             # move away from target if passive
             if self.stance == "passive":
                 if self.x > self.target.x:
-                    self.dx += random.uniform(0.0, float(self.speed))
+                    self.dx += random.uniform(0.002, float(self.speed))
                 elif self.x < self.target.x:
-                    self.dx -= random.uniform(0.0, float(self.speed))
+                    self.dx -= random.uniform(0.002, float(self.speed))
                 if self.y > self.target.y:
-                    self.dy += random.uniform(0.0, float(self.speed))
+                    self.dy += random.uniform(0.002, float(self.speed))
                 elif self.y < self.target.y:
-                    self.dy -= random.uniform(0.0, float(self.speed))
+                    self.dy -= random.uniform(0.002, float(self.speed))
 
             # dont move if idle
             if self.stance == "idle":
