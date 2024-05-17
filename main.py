@@ -2,7 +2,7 @@
 # by Vince Swu
 
 import turtle
-from settings import BORDER_HEIGHT, WIDTH, HEIGHT, BORDER_WIDTH, MISSILES
+from settings import BORDER_HEIGHT, WIDTH, HEIGHT, BORDER_WIDTH
 from sprite import *
 from player import *
 from utils import Camera, Star
@@ -188,9 +188,13 @@ if PLAYERS > 1:
     players.append(player2)
 
 # add sprites to list
-for _ in range(MISSILES):
-    missiles1.append(missile1)
-    missiles2.append(missile2)
+if len(players) > 1:
+    for _ in range(2):
+        missiles1.append(missile1)
+        missiles2.append(missile2)
+else:
+    for _ in range(3):
+        missiles1.append(missile1)
 
 # set up the camera
 camera = Camera(0, 0)

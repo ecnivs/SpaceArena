@@ -78,7 +78,7 @@ class Player(Sprite):
                 self.dx -= missile.dx * 0.02
                 self.dy -= missile.dy * 0.02
 
-                directions.pop(0)
+                directions.remove(0)
 
                 if len(directions) == 0:
                     break
