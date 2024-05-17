@@ -136,6 +136,7 @@ class Enemy(Sprite):
         self.speed = ENEMY_SPEED
         self.max_health = 50
         self.health = self.max_health
+        self.last_hit = "None"
         self.stance = random.choice(["agressive", "passive", "idle"])
         if self.stance == "agressive":
             self.color = "red"

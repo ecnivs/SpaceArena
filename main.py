@@ -58,7 +58,7 @@ class Game:
         pen.goto(left, top)
         pen.penup()
 
-    def render_info(self, pen, active_enemies):
+    def render_info(self, pen):
         pen.color("#202020")
         pen.penup()
         pen.goto(400, 0)
@@ -74,19 +74,21 @@ class Game:
         pen.goto(300, -400)
         
         pen.penup()
-        pen.color("white")
         character_pen.scale = 1.0
+        character_pen.color = "gold"
         character_pen.draw_string(pen, "SPACE ARENA", 400, 270)
-        character_pen.draw_string(pen, "ENEMIES {}".format(active_enemies), 400, 240)
-        character_pen.draw_string(pen, "LEVEL {}".format(game.level), 400, 210)
+        character_pen.color = "silver"
+        character_pen.draw_string(pen, "LEVEL {}".format(game.level), 400, 240)
+        character_pen.color = "blue"
         if PLAYERS > 1:
-            character_pen.draw_string(pen, "1P LIVES {}".format(player.lives), 400, 180)
-            character_pen.draw_string(pen, "1P SCORE {}".format(player1.score), 400, 150)
-            character_pen.draw_string(pen, "2P LIVES {}".format(player.lives), 400, 120)
-            character_pen.draw_string(pen, "2P SCORE {}".format(player2.score), 400, 90)
+            character_pen.draw_string(pen, "1P LIVES {}".format(player.lives), 400, 210)
+            character_pen.draw_string(pen, "1P SCORE {}".format(player1.score), 400, 180)
+            character_pen.color = "red"
+            character_pen.draw_string(pen, "2P LIVES {}".format(player.lives), 400, 150)
+            character_pen.draw_string(pen, "2P SCORE {}".format(player2.score), 400, 120)
         else:
-            character_pen.draw_string(pen, "LIVES {}".format(player1.lives), 400, 180)
-            character_pen.draw_string(pen, "SCORE {}".format(player1.score), 400, 150)
+            character_pen.draw_string(pen, "LIVES {}".format(player1.lives), 400, 210)
+            character_pen.draw_string(pen, "SCORE {}".format(player1.score), 400, 180)
         
     def start(self):
         self.state = "playing"
@@ -275,18 +277,26 @@ while True:
         if isinstance(sprite, Enemy) and sprite.state == "active":
             if players[0].is_collision(sprite):
                 players[0].collide(sprite)
+                if sprite.health <= 0:
+                    players[0].score += 100
 
             if len(players) > 1:
                 if players[-1].is_collision(sprite):
                     players[-1].collide(sprite)
+                    if sprite.health <= 0:
+                        players[-1].score += 100
 
             if missile1.state == "active" and missile1.is_collision(sprite):
                 sprite.health -= player1.damage
                 missile1.reset()
+                if sprite.health <= 0:
+                    player1.score += 100
 
             if missile2.state == "active" and missile2.is_collision(sprite):
                 sprite.health -= player2.damage
                 missile2.reset()
+                if sprite.health <= 0:
+                    player2.score += 100
 
         if isinstance(sprite, Powerup):
             if players[0].is_collision(sprite) and sprite.state == "active":
@@ -312,13 +322,17 @@ while True:
     if len(players) > 1:
         if players[0].is_collision(players[-1]):
             players[0].collide(players[-1])
+            players[0].score -= 20
+            players[-1].score -= 20
 
     # missile to player collision
     if player1.is_collision(missile2) and missile2.state == "active":
         player1.health -= (player2.damage//2)
+        player1.score -= 20
         missile2.reset()
     if player2.is_collision(missile1) and missile1.state == "active":
         player2.health -= (player1.damage//2)
+        player2.score -= 20
         missile1.reset()
     
     # remove players if inactive
@@ -339,7 +353,7 @@ while True:
         game.start_level()
 
     # render stats
-    game.render_info(pen, 0)
+    game.render_info(pen)
     radar.render(pen)
     
     # update the screen
