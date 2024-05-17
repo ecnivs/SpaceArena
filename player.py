@@ -8,7 +8,7 @@ missiles1 = []
 missiles2 = []
 
 class Player(Sprite):
-    def __init__(self, x, y, shape, color):
+    def __init__(self, x, y, shape, color, missiles):
         Sprite.__init__(self, x, y, shape, color)
         self.lives = LIVES
         self.heading = 90
@@ -23,6 +23,7 @@ class Player(Sprite):
         self.width = 20
         self.height = 20
         self.regen = REGEN
+        self.missiles = missiles
 
     def accelerate(self):
         self.thrust += self.acceleration
@@ -58,35 +59,11 @@ class Player(Sprite):
         elif self.x < camera_left + 20:
             self.dx *= -1
 
-    def fire1(self):
+    def fire(self):
 
         directions = [0, 5, -5]
 
-        for missile in missiles1:
-            if missile.state == "ready":
-                missile.x = self.x
-                missile.y = self.y
-                missile.heading = self.heading + directions[0]
-                missile.dx = math.cos(math.radians(missile.heading)) * missile.thrust
-                missile.dy = math.sin(math.radians(missile.heading)) * missile.thrust
-                missile.dx += self.dx
-                missile.dy += self.dy
-                missile.state = "active"
-                
-                # recoil
-                self.dx -= missile.dx * 0.02
-                self.dy -= missile.dy * 0.02
-
-                directions.pop(0)
-
-                if len(directions) == 0:
-                    break
-
-    def fire2(self):
-
-        directions = [0, 5, -5]
-
-        for missile in missiles2:
+        for missile in self.missiles:
             if missile.state == "ready":
                 missile.x = self.x
                 missile.y = self.y
@@ -202,10 +179,10 @@ class Missile(Sprite):
             pen.stamp()
             pen.shapesize(stretch_wid=1, stretch_len=1, outline=None)
 
-# register players
-player1 = Player(-100, 0, "turtle", "blue")
-player2 = Player(100, 0, "turtle", "red")
-
 # register missiles
 missile1 = Missile(0,0, "circle", "yellow")
 missile2 = Missile(0,0, "circle", "yellow")
+
+# register players
+player1 = Player(-100, 0, "turtle", "blue", missiles1)
+player2 = Player(100, 0, "turtle", "red", missiles2)

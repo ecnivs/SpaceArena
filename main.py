@@ -202,7 +202,7 @@ wn.onkeypress(player1.reverse, "S")
 
 wn.onkeypress(player1.brake, "e")
 wn.onkeypress(player1.brake, "E")
-wn.onkeypress(player1.fire1, "space")
+wn.onkeypress(player1.fire, "space")
 
 wn.onkeyrelease(player1.stop_rotation, "a")
 wn.onkeyrelease(player1.stop_rotation, "d")
@@ -220,7 +220,7 @@ wn.onkeypress(player2.accelerate, "Up")
 wn.onkeypress(player2.reverse, "Down")
 
 wn.onkeypress(player2.brake, "Shift_L")
-wn.onkeypress(player2.fire2, "Return")
+wn.onkeypress(player2.fire, "Return")
 
 wn.onkeyrelease(player2.stop_rotation, "Left")
 wn.onkeyrelease(player2.stop_rotation, "Right")
