@@ -8,7 +8,6 @@ from player import *
 from utils import Camera, Star
 from penconf import *
 import random
-from time import sleep
 
 # secreen setup
 wn = turtle.Screen()
