@@ -8,6 +8,7 @@ from player import *
 from utils import Camera, Star
 from penconf import *
 import random
+from time import sleep
 
 # secreen setup
 wn = turtle.Screen()
@@ -25,7 +26,6 @@ class Game:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.frame = 0
         self.level = 2
 
     def start_level(self):
@@ -339,15 +339,13 @@ while True:
             player2.score -= 20
         missile1.reset()
     
-    # remove players if inactive
-    if len(players) > 1:
-        if players[0].state == "inactive":
-            players.pop(0)
-    if len(players) > 1:
-        if players[-1].state == "inactive":
-            players.pop(-1)
-    
-    # check for end of start
+    # game over
+    if players[0].state == "inactive" and players[-1].state == "inactive":
+        character_pen.color = "white"
+        character_pen.draw_string(pen, "GAME OVER", 0,0)
+        character_pen.draw_string(pen, "BETTER LUCK NEXT TIME", 0 , -30)
+        
+    # level up
     end_level = True
     for sprite in sprites:
         if isinstance(sprite, Enemy) and sprite.state == "active":

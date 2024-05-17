@@ -61,7 +61,6 @@ class Player(Sprite):
             self.dx *= -1
 
     def fire(self):
-
         directions = [0, 5, -5]
 
         for missile in self.missiles:
