@@ -50,8 +50,8 @@ class Sprite:
         other.dy = temp_dy
         
         # collision damage
-        self.health -= (self.max_health/10)
-        other.health -= (other.max_health/5)
+        self.health -= (self.max_health/5)
+        other.health -= (other.max_health/10)
 
         # 25% chance to change stance on collision
         if isinstance(other, Enemy):
@@ -162,9 +162,6 @@ class Enemy(Sprite):
             self.heading += self.da
             self.heading %= 360
 
-            self.x += self.dx
-            self.y += self.dy
-
             self.border_chk()
             if self.health <= 0:
                 self.state = self.reset()
@@ -179,33 +176,37 @@ class Enemy(Sprite):
             else:
                 self.target = self.target1
 
-            # move towards target if agressive
-            if self.stance == "agressive":
-                if self.x > self.target.x:
-                    self.dx -= random.uniform(0.002, float(self.speed))
-                elif self.x < self.target.x:
-                    self.dx += random.uniform(0.002, float(self.speed))
-                if self.y > self.target.y:
-                    self.dy -= random.uniform(0.002, float(self.speed))
-                elif self.y < self.target.y:
-                    self.dy += random.uniform(0.002, float(self.speed))
+            if tar_dist1 < 300 or tar_dist2 < 300:
+                # move towards target if agressive
+                if self.stance == "agressive":
+                    if self.x > self.target.x:
+                        self.dx -= random.uniform(0.002, float(self.speed))
+                    elif self.x < self.target.x:
+                        self.dx += random.uniform(0.002, float(self.speed))
+                    if self.y > self.target.y:
+                        self.dy -= random.uniform(0.002, float(self.speed))
+                    elif self.y < self.target.y:
+                        self.dy += random.uniform(0.002, float(self.speed))
 
-            # move away from target if passive
-            if self.stance == "passive":
-                if self.x > self.target.x:
-                    self.dx += random.uniform(0.002, float(self.speed))
-                elif self.x < self.target.x:
-                    self.dx -= random.uniform(0.002, float(self.speed))
-                if self.y > self.target.y:
-                    self.dy += random.uniform(0.002, float(self.speed))
-                elif self.y < self.target.y:
-                    self.dy -= random.uniform(0.002, float(self.speed))
+                # move away from target if passive
+                if self.stance == "passive":
+                    if self.x > self.target.x:
+                        self.dx += random.uniform(0.002, float(self.speed))
+                    elif self.x < self.target.x:
+                        self.dx -= random.uniform(0.002, float(self.speed))
+                    if self.y > self.target.y:
+                        self.dy += random.uniform(0.002, float(self.speed))
+                    elif self.y < self.target.y:
+                        self.dy -= random.uniform(0.002, float(self.speed))
 
-            # dont move if idle
+                # dont move if idle
             if self.stance == "idle":
                 if self.dx != 0 or self.dy != 0:
                     self.dx /= 1.01
                     self.dy /= 1.01
+
+            self.x += self.dx
+            self.y += self.dy
 
             # regen
             if self.health < self.max_health:
