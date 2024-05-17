@@ -61,13 +61,11 @@ class Player(Sprite):
             self.dx *= -1
 
     def fire(self):
-        directions = [0, 5, -5]
-
         for missile in self.missiles:
             if missile.state == "ready":
                 missile.x = self.x
                 missile.y = self.y
-                missile.heading = self.heading + directions[0]
+                missile.heading = self.heading
                 missile.dx = math.cos(math.radians(missile.heading)) * missile.thrust
                 missile.dy = math.sin(math.radians(missile.heading)) * missile.thrust
                 missile.dx += self.dx
@@ -77,11 +75,6 @@ class Player(Sprite):
                 # recoil
                 self.dx -= missile.dx * 0.02
                 self.dy -= missile.dy * 0.02
-
-                directions.remove(0)
-
-                if len(directions) == 0:
-                    break
 
     def update(self):
         if self.state == "active":

@@ -187,14 +187,10 @@ players.append(player1)
 if PLAYERS > 1:
     players.append(player2)
 
-# add sprites to list
-if len(players) > 1:
-    for _ in range(2):
-        missiles1.append(missile1)
-        missiles2.append(missile2)
-else:
-    for _ in range(3):
-        missiles1.append(missile1)
+# missiles
+for _ in range(2):
+    missiles1.append(missile1)
+    missiles2.append(missile2)
 
 # set up the camera
 camera = Camera(0, 0)
