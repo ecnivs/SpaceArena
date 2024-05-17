@@ -119,25 +119,7 @@ class Player(Sprite):
             pen.color(self.color)
             pen.setheading(self.heading)
             pen.stamp()
-
-            # Draw health
-            pen.goto(self.x - x_offset - 10.0, self.y - y_offset + 20.0)
-            pen.width(3.0)
-            pen.pendown()
-            pen.setheading(0.0)
-            try:
-                if self.health / self.max_health < 0.3:
-                    pen.color("red")
-                elif self.health / self.max_health < 0.7:
-                    pen.color("yellow")
-                else:
-                    pen.color("green")
-                pen.fd(20.0 * (self.health / self.max_health))
-                if self.health < self.max_health:
-                    pen.color("grey")
-                    pen.fd(20.0 * ((self.max_health - self.health) / self.max_health))
-            except Exception as e:
-                print(e)
+            self.render_health(pen, x_offset, y_offset)
 
         pen.penup()
 
