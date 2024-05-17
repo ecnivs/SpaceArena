@@ -289,14 +289,16 @@ while True:
                 missile2.reset()
 
         if isinstance(sprite, Powerup):
-            if players[0].is_collision(sprite):
+            if players[0].is_collision(sprite) and sprite.state == "active":
                 sprite.reset()
                 players[0].health = players[0].max_health
+                players[0].score += 50
 
             if len(players) > 1:
-                if players[-1].is_collision(sprite):
+                if players[-1].is_collision(sprite) and sprite.state == "active":
                     sprite.reset()
                     players[-1].health = players[-1].max_health
+                    players[-1].score += 50
 
             if missile1.state == "active" and missile1.is_collision(sprite):
                 sprite.reset()
