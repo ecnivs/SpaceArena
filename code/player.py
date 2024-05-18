@@ -154,7 +154,7 @@ class Missile(Sprite):
 
     def render(self, pen, x_offset, y_offset):
         if self.state == "active":
-            pen.shapesize(stretch_wid=0.2, stretch_len=0.2, outline=None)
+            pen.shapesize(stretch_wid=0.1, stretch_len=0.3, outline=None)
             pen.goto(self.x - x_offset, self.y - y_offset)
             pen.shape(self.shape)
             pen.color(self.color)

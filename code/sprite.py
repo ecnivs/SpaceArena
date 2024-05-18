@@ -61,10 +61,13 @@ class Sprite:
                 other.stance = random.choice(["agressive", "passive", "idle"])
                 if other.stance == "agressive":
                     other.color = "red"
+                    other.shape = "../graphics/hunter.gif"
                 elif other.stance == "passive":
                     other.color = "orange"
+                    other.shape = "../graphics/surveillance.gif"
                 elif other.stance == "idle":
                     other.color = "yellow"
+                    other.shape = "../graphics/mine.gif"
 
 
     def border_chk(self):
@@ -144,12 +147,15 @@ class Enemy(Sprite):
 
         if self.stance == "agressive":
             self.color = "red"
+            self.shape = "../graphics/hunter.gif"
             self.sensor_range = random.randint(100, 200)
         elif self.stance == "passive":
             self.color = "orange"
+            self.shape = "../graphics/surveillance.gif"
             self.sensor_range = random.randint(100, 200)
         elif self.stance == "idle":
             self.color = "yellow"
+            self.shape = "../graphics/mine.gif"
             self.sensor_range = random.randint(200, 400)
 
     def render(self, pen, x_offset, y_offset):
@@ -209,6 +215,7 @@ class Enemy(Sprite):
                 
                 if Sprite.is_collision(self.target, self, self.sensor_range):
                     self.stance = "agressive"
+                    self.shape = "../graphics/hunter.gif"
                     self.color = "red"
                 
             elif self.stance == "passive":

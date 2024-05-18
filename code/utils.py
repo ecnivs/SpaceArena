@@ -3,7 +3,6 @@ import random
 from settings import WIDTH, RADAR
 import os
 import platform
-import winsound
 import turtle
 
 class Camera:

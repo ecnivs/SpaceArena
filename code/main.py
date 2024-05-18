@@ -16,6 +16,10 @@ wn.title("Space Arena")
 wn.bgcolor("black")
 wn.tracer(0)
 
+images = ["../graphics/hunter.gif", "../graphics/surveillance.gif", "../graphics/mine.gif", "../graphics/powerup.gif"]
+for image in images:
+    wn.register_shape(image)
+
 # sprite lists
 sprites = []
 background_sprites = []
@@ -152,7 +156,7 @@ class Radar():
                 pen.color(missile.color)
                 pen.setheading(missile.heading)
                 pen.shape(missile.shape)
-                pen.shapesize(0.1, 0.1, None)              
+                pen.shapesize(0.1, 0.2, None)              
                 distance = ((camera.x-missile.x)**2 + (camera.y - missile.y)**2)**0.5
                 if distance < camera.radar:
                     pen.stamp()
@@ -166,7 +170,7 @@ class Radar():
                 pen.color(missile.color)
                 pen.setheading(missile.heading)
                 pen.shape(missile.shape)
-                pen.shapesize(0.1, 0.1, None)              
+                pen.shapesize(0.1, 0.2, None)              
                 distance = ((camera.x-missile.x)**2 + (camera.y - missile.y)**2)**0.5
                 if distance < camera.radar:
                     pen.stamp()
@@ -191,7 +195,7 @@ if PLAYERS > 1:
     players.append(player2)
 
 # missiles
-for _ in range(3):
+for _ in range(2):
     missiles1.append(missile1)
     missiles2.append(missile2)
 
@@ -352,6 +356,7 @@ while True:
             center_x = (players[0].x + players[-1].x) / 2.0
             center_y = (players[0].y + players[-1].y) / 2.0
             explosion.explode(center_x+100, center_y)
+            players[-1].health -= (players[-1].max_health/10)
             play_sound("../audio/explosion.wav")
             if players[0].score > 0:
                 players[0].score -= 20
