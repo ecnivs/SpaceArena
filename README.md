@@ -7,7 +7,6 @@ Space Arena is a two-player space battle game. Players control spaceships, navig
 * Inertia Thrust Mechanics
 * Dynamic Obstacles
 * Power-Ups
-* Destroy Obstacles
 * Radar System
 
 ## Prerequisites
@@ -50,4 +49,4 @@ python main.py
 ## Acknowledgments
 Inspired by Christian Thompson's Space Arena.
 
-Enjoy the game!
+### Enjoy the game!
