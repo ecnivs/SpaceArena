@@ -1,5 +1,4 @@
 # Space Arena
-This repository revolves around building a game using just Turtle graphics. I'd appreciate any feedback or code reviews you might have
+## The Ultimate Python Turtle Graphics Game. 
 
-
-### NOTE: THIS GAME IS STILL IN PROGRESS
+I'd appreciate any feedback or code reviews you might have
