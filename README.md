@@ -17,6 +17,8 @@ Space Arena is a 2P space battle game. Players control spaceships, navigating an
     * Turtle
     * Math
     * Random
+    * Platform
+    * OS
 
 ## Installation
 + Ensure Python 3.x is installed from python.org.
