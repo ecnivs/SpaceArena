@@ -1,0 +1,22 @@
+# screen settings
+WIDTH = 800
+HEIGHT = 600
+
+# game settings
+BORDER_WIDTH = 1400
+BORDER_HEIGHT = 520
+BOUNCE = 0.9
+PLAYERS = 2 # One or Two
+RADAR = 300
+ENEMY_SPEED = 0.008
+ENEMY_REGEN = 0.004
+
+# player settings
+LIVES = 3
+MAX_HEALTH = 100
+ACCELERATION = 0.008
+MAX_THRUST = 3
+ROTATION_SPEED = 0.6
+MAX_FUEL = 200 # missile fuel
+DAMAGE = 20
+REGEN = 0.004
