@@ -251,4 +251,5 @@ class Enemy(Sprite):
 class Powerup(Sprite):
     def __init__(self, x, y, shape, color):
         Sprite.__init__(self, x, y, shape, color)
+        self.shape = "../graphics/powerup.gif"
         
