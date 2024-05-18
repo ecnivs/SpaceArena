@@ -11,7 +11,11 @@ Space Arena is a two-player space battle game. Players control spaceships, navig
 * Radar System
 
 ## Prerequisites
-* Python 3.x
+* Python 3.x 
+* Python Modules:
+    * Turtle
+    * Math
+    * Random
 
 ## Installation
 + Ensure Python 3.x is installed from python.org.
@@ -24,22 +28,26 @@ python main.py
 
 ## Controls
 ### Player 1
-W: Thrust forward
-A: Rotate left
-D: Rotate right
+* W: Thrust forward
+* S: Reverse Thrust
+* A: Rotate left
+* D: Rotate right
+* Space: Shoot
 ### Player 2
-Up Arrow: Thrust forward
-Left Arrow: Rotate left
-Right Arrow: Rotate right
+* Up Arrow: Thrust forward
+* Down Arrow: Reverse Thrust
+* Left Arrow: Rotate left
+* Right Arrow: Rotate right
+* Return: Shoot
 
 ## How to Play
-### Run the Game
-### Control Your Ship
-### Avoid and Destroy Obstacles
-### Collect Power-Ups
-### Use Radar
+* Run the Game
+* Control Your Ship
+* Avoid and Destroy Obstacles
+* Collect Power-Ups
+* Use Radar
 
 ## Acknowledgments
-### Inspired by Christian Thompson's Space Arena.
+Inspired by Christian Thompson's Space Arena.
 
 Enjoy the game!
