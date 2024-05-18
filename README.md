@@ -21,9 +21,9 @@ Space Arena is a two-player space battle game. Players control spaceships, navig
 + Clone this repository or download and extract the ZIP file.
 
 ## Running the Game
-`
+```
 python main.py
-`
+```
 
 ## Controls
 ### Player 1
