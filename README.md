@@ -1,6 +1,6 @@
 # Space Arena Game
 ## Overview
-Space Arena is a two-player space battle game. Players control spaceships, navigating an arena filled with dynamic obstacles and power-ups. The objective is to outmaneuver and outlast your opponent.
+Space Arena is a 2P space battle game. Players control spaceships, navigating an arena filled with dynamic obstacles and power-ups. The objective is to outmaneuver and outlast your opponent.
 
 ## Features
 * Two-Player Mode
