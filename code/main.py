@@ -2,14 +2,15 @@
 # by Vince Swu
 
 import turtle
-from settings import BORDER_HEIGHT, WIDTH, HEIGHT, BORDER_WIDTH
+from settings import BORDER_HEIGHT, WIDTH, HEIGHT, BORDER_WIDTH, FPS
 from sprite import *
 from player import *
 from utils import Camera, Star
 from penconf import *
 import random
+import time
 
-# secreen setup
+# screen setup
 wn = turtle.Screen()
 wn.setup(WIDTH+220, HEIGHT+220)
 wn.title("Space Arena")
@@ -26,6 +27,9 @@ background_sprites = []
 
 # background music
 play_sound('../audio/bgm.wav')
+
+# frames per second
+frame_duration = 1.0 / FPS
 
 # game class
 class Game:
@@ -246,6 +250,8 @@ wn.onkeyrelease(player2.decelerate, "Up")
 wn.onkeyrelease(player2.decelerate, "Down")
 
 while True:
+    start_time = time.time()
+
     # render borders
     game.render_border(pen, camera.x - 100, camera.y)
 
@@ -403,3 +409,11 @@ while True:
 
     # clear the screen
     pen.clear()
+
+    # calculate elapsed_time
+    elapsed_time = time.time() - start_time
+    time_to_sleep = frame_duration - elapsed_time
+
+    # ensure the loop runs at correct speed
+    if time_to_sleep > 0:
+        time.sleep(time_to_sleep)
