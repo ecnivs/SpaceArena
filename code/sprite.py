@@ -1,5 +1,5 @@
 import math
-from settings import BORDER_WIDTH, BORDER_HEIGHT, BOUNCE, ENEMY_REGEN, ENEMY_SPEED, MAX_HEALTH, PLAYERS
+from settings import BORDER_WIDTH, BORDER_HEIGHT, BOUNCE, ENEMY_REGEN, ENEMY_SPEED, MAX_HEALTH
 import random
 
 class Sprite:
