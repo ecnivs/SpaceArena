@@ -1,10 +1,10 @@
 # screen settings
-WIDTH = 1600
-HEIGHT = 500
+WIDTH = 800
+HEIGHT = 400
 
 # game settings
 BORDER_WIDTH = 1400
-BORDER_HEIGHT = 520
+BORDER_HEIGHT = HEIGHT + 20
 BOUNCE = 0.9
 PLAYERS = 2 # One or Two
 RADAR = 300

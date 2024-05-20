@@ -2,7 +2,7 @@
 # by Vince Swu
 
 import turtle
-from settings import BORDER_HEIGHT, WIDTH, HEIGHT, BORDER_WIDTH, FPS
+from settings import BORDER_HEIGHT, WIDTH, HEIGHT, BORDER_WIDTH, FPS, PLAYERS
 from sprite import *
 from player import *
 from utils import Camera, Star
@@ -17,6 +17,12 @@ wn.title("Space Arena")
 wn.bgcolor("black")
 wn.tracer(0)
 
+# disable resizing
+canvas = wn.getcanvas()
+root = canvas.winfo_toplevel()
+root.resizable(False, False)
+
+# register shapes
 images = ["../graphics/hunter.gif", "../graphics/surveillance.gif", "../graphics/mine.gif", "../graphics/powerup.gif"]
 for image in images:
     wn.register_shape(image)
