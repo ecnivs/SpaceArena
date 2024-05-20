@@ -1,6 +1,6 @@
 # screen settings
 WIDTH = 800
-HEIGHT = 400
+HEIGHT = 600
 
 # game settings
 BORDER_WIDTH = 1400
