@@ -41,12 +41,12 @@ class Game:
     def start_level(self):
         sprites.clear()
 
-        for _ in range(self.level+self.level*2):
+        for _ in range(self.level*len(players)):
             x = random.randint(-self.width//2, self.width//2)
             y = random.randint(-self.height//2, self.height//2)
             sprites.append(Enemy(x, y, "square", "red", players[0], players[-1]))
 
-        for _ in range(self.level+1):
+        for _ in range(self.level*len(players)):
             x = random.randint(-self.width//2, self.width//2)
             y = random.randint(-self.height//2, self.height//2)
             sprites.append(Powerup(x, y, "circle", "green"))
