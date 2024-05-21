@@ -32,17 +32,17 @@ python main.py
 
 ## Controls
 ### Player 1
-* W: Thrust forward
-* S: Reverse Thrust
-* A: Rotate left
-* D: Rotate right
-* Space: Shoot
+* `W`: Thrust forward
+* `S`: Reverse Thrust
+* `A`: Rotate left
+* `D`: Rotate right
+* `Space`: Shoot
 ### Player 2
-* Up Arrow: Thrust forward
-* Down Arrow: Reverse Thrust
-* Left Arrow: Rotate left
-* Right Arrow: Rotate right
-* Return: Shoot
+* `Up Arrow`: Thrust forward
+* `Down Arrow`: Reverse Thrust
+* `Left Arrow`: Rotate left
+* `Right Arrow`: Rotate right
+* `Return`: Shoot
 
 ## How to Play
 * Run the Game
