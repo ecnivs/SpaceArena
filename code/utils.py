@@ -9,6 +9,8 @@ class Camera:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+        
+        # left and right camera borders
         self.left = self.x - (WIDTH / 2)
         self.right = self.x + (WIDTH / 2)
         self.radar = RADAR

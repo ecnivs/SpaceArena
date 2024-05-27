@@ -5,12 +5,12 @@ HEIGHT = 430
 # game settings
 BORDER_WIDTH = 1400
 BORDER_HEIGHT = HEIGHT + 20
-BOUNCE = 0.9
-PLAYERS = 1 # One or Two
+BOUNCE = 0.9 # border bounce multiplier
+PLAYERS = 1 # one or two
 RADAR = 300
 ENEMY_SPEED = 0.02
 ENEMY_REGEN = 0.04
-FPS = 60
+FPS = 60 # frames per second
 
 # player settings
 LIVES = 3

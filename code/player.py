@@ -35,9 +35,9 @@ class Player(Sprite):
         if self.thrust >= self.max_thrust:
             self.thrust = self.max_thrust
 
+        # thruster
         dx = math.cos(math.radians(self.heading + 180)) * 5 
         dy = math.sin(math.radians(self.heading + 180)) * 5
-        
         exhaust.explode(self.x + 100, self.y, dx, dy)
 
     def decelerate(self):

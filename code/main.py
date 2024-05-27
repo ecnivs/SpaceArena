@@ -361,7 +361,7 @@ while True:
                     explosion.explode(missile2.x+100, missile2.y, -missile2.dx, -missile2.dy)
                     missile2.reset()
 
-    # player collision
+    # collision among players
     if len(players) > 1:
         if players[0].is_collision(players[0], players[-1], 18):
             players[0].collide(players[-1])

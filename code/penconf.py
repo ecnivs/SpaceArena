@@ -13,6 +13,7 @@ class CharacterPen():
         self.color = color
         self.scale = scale
         
+        # custom font
         self.characters = {}
         self.characters["1"] = ((-5, 10), (0, 10), (0, -10), (-5, -10), (5, -10))
         self.characters["2"] = ((-5, 10),(5, 10),(5, 0), (-5, 0), (-5, -10), (5, -10))

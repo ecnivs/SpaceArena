@@ -145,6 +145,7 @@ class Enemy(Sprite):
         self.max_dy = 3.0 
         self.stance = random.choice(["agressive", "passive", "idle"])
 
+        # change appearance based on stance
         if self.stance == "agressive":
             self.color = "red"
             self.shape = "../graphics/hunter.gif"
@@ -208,11 +209,13 @@ class Enemy(Sprite):
                     else: 
                         self.dy -= self.speed
                 
+            # stop if idle
             elif self.stance == "idle":
                 if self.dx != 0 or self.dy != 0:
                     self.dx /= 1.002
                     self.dy /= 1.002
                 
+                # turn agressive if player in range
                 if Sprite.is_collision(self.target, self, self.sensor_range):
                     self.stance = "agressive"
                     self.shape = "../graphics/hunter.gif"
